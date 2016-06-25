@@ -12,12 +12,12 @@ import * as ContentType from "content-type";
 
 export interface ParserOptions {
     [key: string]: string | number | boolean;
-    charset: string;
+    encoding: string;
     limit: string;
 }
 
 const DefaultParserOptions: ParserOptions = {
-    charset: "utf8",
+    encoding: "utf8",
     limit: ""
 }
 
@@ -99,7 +99,7 @@ export default class ErouterParser {
     }
 
     private handleReqData(chunk: Buffer) {
-        let reqData = chunk.toString(this.getReqCharset() || this.options.charset);
+        let reqData = chunk.toString(this.getReqCharset() || this.options.encoding);
         console.log("-----req on data: ", reqData);
         console.log("-----chunk length: ", chunk && chunk.length);
 

@@ -2,8 +2,9 @@
 var express_1 = require("express");
 var Bytes = require("bytes");
 var HttpErrors = require("http-errors");
+var ContentType = require("content-type");
 var DefaultParserOptions = {
-    charset: "utf8",
+    encoding: "utf8",
     limit: ""
 };
 var ErouterParser = (function () {
@@ -21,28 +22,23 @@ var ErouterParser = (function () {
         this.req = req;
         return this;
     };
-    ErouterParser.prototype.bindNext = function (next) {
-        this.next = next;
-        return this;
-    };
-    ErouterParser.parserBody = function (req, next, options) {
-        var parser = new ErouterParser(options).bindReq(req).bindNext(next);
-        if (req.body) {
+    ErouterParser.prototype.parserBody = function (req) {
+        if (this.req.body) {
+            console.warn("req already parsed.");
         }
-        parser.onReqAborted()
+        this.onReqAborted()
             .onReqClose()
             .onReqData()
             .onReqEnd()
             .onReqError();
     };
     ErouterParser.parser = function (options) {
-        var _this = this;
-        var router = express_1.Router();
-        router.use(function (req, res, next) {
-            _this.parserBody(req, next, options);
-            next();
+        var _router = express_1.Router();
+        _router.use(function (req, res, next) {
+            var _parser = new ErouterParser(options).bindReq(req);
+            _parser.errors.length ? next() : next(HttpErrors(_parser.errors.join(",-")));
         });
-        return router;
+        return _router;
     };
     ErouterParser.prototype.onReqAborted = function () {
         this.req.on("aborted", this.handleReqAborted.bind(this));
@@ -66,16 +62,14 @@ var ErouterParser = (function () {
     };
     ErouterParser.prototype.handleReqAborted = function () {
         console.log("-----req on aborted: ", arguments);
-        this.next(HttpErrors("request aborted, ErouterParser options is: " + this.options));
+        this.errors.push("request aborted.");
     };
     ErouterParser.prototype.handleReqData = function (chunk) {
-        var reqData = chunk.toString(this.options.charset);
+        var reqData = chunk.toString(this.getReqCharset() || this.options.encoding);
         console.log("-----req on data: ", reqData);
         console.log("-----chunk length: ", chunk && chunk.length);
         if (chunk.length > Bytes.parse(this.options.limit)) {
-            this.next(HttpErrors("Chunk[" + chunk.length + "] is too large, length is limited: ", {
-                limit: this.options.limit
-            }));
+            this.errors.push(("Chunk[" + chunk.length + "] is too large."));
         }
         try {
             console.log("in try");
@@ -92,7 +86,7 @@ var ErouterParser = (function () {
     ErouterParser.prototype.handleReqError = function (error) {
         console.log("-----req on error: ", arguments);
         this.onReqClose();
-        this.next("request error: " + error + ", ErouterParser options: " + this.options);
+        this.errors.push("request error: " + error + ".");
     };
     ErouterParser.prototype.handleReqClose = function () {
         console.log("-----req on close: ", arguments);
@@ -101,6 +95,14 @@ var ErouterParser = (function () {
         this.req.removeListener("end", this.handleReqEnd);
         this.req.removeListener("error", this.handleReqError);
         this.req.removeListener("close", this.handleReqClose);
+    };
+    ErouterParser.prototype.getReqCharset = function () {
+        try {
+            return ContentType.parse(this.req).parameters.charset.toLowerCase();
+        }
+        catch (error) {
+            return "";
+        }
     };
     return ErouterParser;
 }());

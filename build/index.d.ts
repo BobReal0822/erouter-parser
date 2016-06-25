@@ -1,17 +1,16 @@
 import { Router as ExpressRouter } from "express";
 export interface ParserOptions {
     [key: string]: string | number | boolean;
-    charset: string;
+    encoding: string;
     limit: string;
 }
 export default class ErouterParser {
     private options;
     private req;
-    private next;
+    private errors;
     constructor(options?: ParserOptions);
     private bindReq(req);
-    private bindNext(next);
-    private static parserBody(req, next, options);
+    private parserBody(req);
     static parser(options?: ParserOptions): ExpressRouter;
     private onReqAborted();
     private onReqData();
@@ -23,4 +22,5 @@ export default class ErouterParser {
     private handleReqEnd();
     private handleReqError(error);
     private handleReqClose();
+    private getReqCharset();
 }
