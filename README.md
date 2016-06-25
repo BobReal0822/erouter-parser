@@ -1,10 +1,5 @@
 # erouter-parser
-
-[![NPM version][npm-image]][npm-url]
-[![build status][travis-image]][travis-url]
-[![Test coverage][coveralls-image]][coveralls-url]
-[![David deps][david-image]][david-url]
-[![npm download][download-image]][download-url]
+Express body parsing middleware.
 
 
 ## Installation
