@@ -6,3 +6,5 @@
 /// <reference path="serve-static/serve-static.d.ts" />
 /// <reference path="superagent/superagent.d.ts" />
 /// <reference path="supertest/supertest.d.ts" />
+/// <reference path="bytes/bytes.d.ts" />
+/// <reference path="content-type/content-type.d.ts" />

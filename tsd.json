@@ -28,6 +28,15 @@
     },
     "superagent/superagent.d.ts": {
       "commit": "73110d92bdab2367e326f297bef3574285cba329"
+    },
+    "bytes/bytes.d.ts": {
+      "commit": "73110d92bdab2367e326f297bef3574285cba329"
+    },
+    "http-errors/http-errors.d.ts": {
+      "commit": "73110d92bdab2367e326f297bef3574285cba329"
+    },
+    "content-type/content-type.d.ts": {
+      "commit": "73110d92bdab2367e326f297bef3574285cba329"
     }
   }
 }
