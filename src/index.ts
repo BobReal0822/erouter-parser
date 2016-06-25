@@ -12,8 +12,8 @@ import * as ContentType from "content-type";
 
 export interface ParserOptions {
     [key: string]: string | number | boolean;
-    encoding: string;
-    limit: string;
+    encoding?: string;
+    limit?: string;
 }
 
 const DefaultParserOptions: ParserOptions = {
@@ -21,7 +21,7 @@ const DefaultParserOptions: ParserOptions = {
     limit: ""
 }
 
-export default class ErouterParser {
+class ErouterParser {
     private options: ParserOptions;
     private req: ExpressRequest;
     private errors: string[];
@@ -56,7 +56,7 @@ export default class ErouterParser {
             .onReqError();
     }
 
-    public static parser(options?: ParserOptions): ExpressRouter {
+    static parser(options?: ParserOptions): ExpressRouter {
         let _router = ExpressRouter();
 
         _router.use((req: ExpressRequest, res: ExpressResponse, next: Function) => {
@@ -144,3 +144,5 @@ export default class ErouterParser {
     }
 }
 
+let Parser: (options?: ParserOptions) => ExpressRouter = ErouterParser.parser;
+export default Parser;

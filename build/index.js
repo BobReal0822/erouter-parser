@@ -106,6 +106,7 @@ var ErouterParser = (function () {
     };
     return ErouterParser;
 }());
+var Parser = ErouterParser.parser;
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = ErouterParser;
+exports.default = Parser;
 //# sourceMappingURL=index.js.map

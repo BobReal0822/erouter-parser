@@ -2,14 +2,18 @@ import * as Path from 'path';
 import * as Request from 'supertest';
 import * as Express from 'express';
 import * as Mocha from 'mocha';
-import { default as Parser } from './../';
+import Parser, { ParserOptions } from './../';
 
 let app = Express(),
     port = 3000,
     // r1 = Express.Router(),
-    r2 = Express.Router();
+    r2 = Express.Router(),
+    options: ParserOptions = {
+        limit: "500kb",
+        encoding: "utf8"
+    };
 
-app.use(Parser.parser());
+app.use(Parser(options));
 // r1.post("/test", Parser.parser());
 // describe('GET /user', function() {
 //     it('respond with json', function(done) {

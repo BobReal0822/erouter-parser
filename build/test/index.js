@@ -3,8 +3,11 @@ var Express = require('express');
 var _1 = require('./../');
 var app = Express(), port = 3000, 
 // r1 = Express.Router(),
-r2 = Express.Router();
-app.use(_1.default.parser());
+r2 = Express.Router(), options = {
+    limit: "500kb",
+    encoding: "utf8"
+};
+app.use(_1.default(options));
 // r1.post("/test", Parser.parser());
 // describe('GET /user', function() {
 //     it('respond with json', function(done) {
