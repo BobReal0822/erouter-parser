@@ -1,0 +1,16 @@
+{
+  "name": "erouter-parser",
+  "globalDependencies": {
+    "mocha": "github:DefinitelyTyped/DefinitelyTyped/mocha/mocha.d.ts#73110d92bdab2367e326f297bef3574285cba329",
+    "express": "github:DefinitelyTyped/DefinitelyTyped/express/express.d.ts#73110d92bdab2367e326f297bef3574285cba329",
+    "serve-static": "github:DefinitelyTyped/DefinitelyTyped/serve-static/serve-static.d.ts#73110d92bdab2367e326f297bef3574285cba329",
+    "express-serve-static-core": "github:DefinitelyTyped/DefinitelyTyped/express-serve-static-core/express-serve-static-core.d.ts#73110d92bdab2367e326f297bef3574285cba329",
+    "mime": "github:DefinitelyTyped/DefinitelyTyped/mime/mime.d.ts#73110d92bdab2367e326f297bef3574285cba329",
+    "node": "github:DefinitelyTyped/DefinitelyTyped/node/node.d.ts#73110d92bdab2367e326f297bef3574285cba329",
+    "supertest": "github:DefinitelyTyped/DefinitelyTyped/supertest/supertest.d.ts#73110d92bdab2367e326f297bef3574285cba329",
+    "superagent": "github:DefinitelyTyped/DefinitelyTyped/superagent/superagent.d.ts#73110d92bdab2367e326f297bef3574285cba329",
+    "bytes": "github:DefinitelyTyped/DefinitelyTyped/bytes/bytes.d.ts#73110d92bdab2367e326f297bef3574285cba329",
+    "http-errors": "github:DefinitelyTyped/DefinitelyTyped/http-errors/http-errors.d.ts#73110d92bdab2367e326f297bef3574285cba329",
+    "content-type": "github:DefinitelyTyped/DefinitelyTyped/content-type/content-type.d.ts#73110d92bdab2367e326f297bef3574285cba329"
+  }
+}
